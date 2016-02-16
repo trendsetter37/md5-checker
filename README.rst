@@ -1,0 +1,16 @@
+### README
+---
+This module is a simple utility to examine a file's checksum
+
+#### Install
+``
+git clone https://github.com/trendsetter37/md5-checker.git
+``
+
+`` cd md5-checker ``
+
+`` pip install . ``
+<br>
+
+#### Usage
+`md5checker path-to-file`
