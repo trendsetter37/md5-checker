@@ -1,11 +1,14 @@
 0.1.1
 =====
 * Clerical fixes
-* `Argument checking <Argument checking>`_
+* `Argument checking`_
 
-`<Argument checking>`_
+
+
+Argument checking
+-----------------
 ::
-  
+
   def main():
       ''' Entry point for the application script '''
       args = sys.argv
