@@ -9,6 +9,8 @@ python:
 # command to install dependencies
 before-install:
   - pip install pytest pytest-cov
+install:
+  - pip install .
 git:
   depth: 3
 # command to run tests
