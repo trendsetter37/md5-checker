@@ -2,6 +2,7 @@
    :target: https://travis-ci.org/trendsetter37/md5-checker
    :width: 50 %
 
+
 .. image:: https://codecov.io/github/trendsetter37/md5-checker/coverage.svg?branch=master
    :target: https://codecov.io/github/trendsetter37/md5-checker?branch=master
    :width: 50 %
