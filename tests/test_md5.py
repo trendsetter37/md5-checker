@@ -1,8 +1,17 @@
 ''' Testing MD5 functionality '''
-from data.data import files
+from __future__ import print_function
 from md5checker import make_hash
+import os
+import json
+
+_DIRECTORY = os.path.dirname(__file__)
+_join = os.path.join
+DATA_PATH = os.path.abspath(_join(_DIRECTORY, 'data'))
+
+with open(str(_join(DATA_PATH, 'data.json')), 'r') as f:
+    files = json.loads(f.read())
 
 def test_md5_hash():
     for obj in files.keys():
-        filename = 'tests/data/' + obj + '.txt'
+        filename = _join(DATA_PATH, obj + '.txt')
         assert files[obj]['md5'] == make_hash(filename).upper()

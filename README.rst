@@ -8,27 +8,62 @@ This module is a simple utility to examine a file's checksum
 
 Install
 -------
+
+One-liner
+~~~~~~~~~
 ::
 
-    pip install md5checker
+  pip install md5checker
 
+Other ways
+~~~~~~~~~~~
+::
+
+  git clone https://github.com/trendsetter37/md5-checker
+  cd md5-checker
+
+Followed by:
+
+::
+
+  python setup.py install
+
+or
+
+::
+
+  pip install .
+
+Testing
+-------
+Inside the root directory, run
+
+::
+
+  pip install pytest>=2.8.7
+  py.test
 
 Usage
 -----
 
 Command Line
-^^^^^^^^^^^^
+~~~~~~~~~~~~
 ::
 
-    md5checker "Space containing directory/path-to-file.extension"
+  md5checker "Space containing directory/path-to-file.extension"
 
-Surround path with double quotes if it contains spaces.
+Surround path with double quotes if it contains spaces. Otherwise
+quotations are unnecessary.
+
+::
+
+  md5checker space-containing-directory/path-to-file.extension
 
 Module
-^^^^^^
+~~~~~~
 ::
 
-    >>> from md5checker import make_hash
-    >>> make_hash('test2.txt')
-    '970d8d13fc40ecb5c382790540d227a4'
-    >>>
+  >>> from md5checker import make_hash
+  >>> make_hash('test2.txt')
+  '970d8d13fc40ecb5c382790540d227a4'
+  >>>
