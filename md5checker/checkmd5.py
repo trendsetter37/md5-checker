@@ -1,6 +1,5 @@
 ''' Module contains functions required for hashing file data '''
 from __future__ import print_function
-import sys
 import os
 import hashlib
 
