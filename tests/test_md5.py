@@ -1,6 +1,6 @@
 ''' Testing MD5 functionality '''
 from __future__ import print_function
-from md5checker import make_hash
+from md5checker import checkmd5
 import os
 import json
 
@@ -14,4 +14,4 @@ with open(str(_join(DATA_PATH, 'data.json')), 'r') as f:
 def test_md5_hash():
     for obj in files.keys():
         filename = _join(DATA_PATH, obj + '.txt')
-        assert files[obj]['md5'] == make_hash(filename).upper()
+        assert files[obj]['md5'] == checkmd5.make_hash(filename).upper()

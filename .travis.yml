@@ -13,6 +13,6 @@ git:
   depth: 3
 # command to run tests
 script:
-  - py.test --cov=./
+  - py.test --cov=./md5checker
 after_success:
   - codecov
