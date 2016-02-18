@@ -14,5 +14,5 @@ git:
 # command to run tests
 script:
   - py.test --cov=./
-after-success:
+after_success:
   - codecov
