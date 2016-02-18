@@ -8,13 +8,7 @@ python:
   - "3.5"
 # command to install dependencies
 before-install:
-  - "pip install codecov"
-  - "pip install pytest-cov"
-install:
-  - "pip install -r requirements.txt"
-  - "pip install ."
-after-success:
-  - "codecov"
+  - pip install pytest pytest-cov
 git:
   depth: 3
 # command to run tests
