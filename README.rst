@@ -1,3 +1,6 @@
+.. image:: https://travis-ci.org/trendsetter37/md5-checker.svg?branch=master
+    :target: https://travis-ci.org/trendsetter37/md5-checker
+
 MD5Checker
 ==========
 
