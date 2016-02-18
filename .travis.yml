@@ -10,6 +10,9 @@ python:
 install:
   - "pip install -r requirements.txt"
   - "pip install ."
+  - "pip install codecov"
+after-success:
+  - "codecov"
 
 git:
   depth: 3
