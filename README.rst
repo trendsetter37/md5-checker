@@ -49,6 +49,12 @@ Inside the root directory, run
   pip install -r requirements.txt
   py.test
 
+or
+
+::
+
+  python setup.py test
+
 Usage
 -----
 

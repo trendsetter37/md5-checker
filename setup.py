@@ -69,6 +69,10 @@ setup(
     # Modules
     py_modules=['checkmd5'],
 
+    # Test
+    setup_requires=['pytest-runner'],
+    tests_require=['pytest'],
+
     # Alternatively, if you want to distribute just a my_module.py, uncomment
     # this:
     #   py_modules=["my_module"],
