@@ -1,3 +1,8 @@
+0.2.0
+=====
+* Added Tests
+
+
 0.1.1
 =====
 * Clerical fixes
