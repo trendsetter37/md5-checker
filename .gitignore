@@ -72,6 +72,7 @@ data_convert.py
 
 #Virtual Environments
 md5/
+py3
 
 #Environment Variables
 .env
