@@ -8,12 +8,13 @@ import platform
 import pytest
 import json
 
-_DIRECTORY = os.path.dirname(__file__)
+DIRECTORY = os.path.dirname(__file__)
 _join = os.path.join
-DATA_PATH = os.path.abspath(_join(_DIRECTORY, 'data'))
+DATA_PATH = os.path.abspath(_join(DIRECTORY, 'data'))
 USAGE_PROMPT = 'Usage: md5checker "path-to-file"'
 PYTHON_VERSION = platform.python_version()  # Check for python 2.6
 SYSTEM = platform.system()
+PIPE = subprocess.PIPE
 
 
 with open(str(_join(DATA_PATH, 'data.json')), 'r') as f:
