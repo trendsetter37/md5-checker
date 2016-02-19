@@ -16,5 +16,5 @@ def make_hash(filename):
             m.update(contents)
         return m.hexdigest()
     except IOError as err:
-        print('[Errno {}]: {}'.format(err.errno, err.strerror))
+        print('[Errno {0}]: {1}'.format(err.errno, err.strerror))
         raise err
