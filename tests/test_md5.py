@@ -1,6 +1,6 @@
 ''' Testing MD5 functionality '''
 from __future__ import print_function
-from md5checker import checkmd5, __init__
+from md5checker import checkmd5
 import os
 import subprocess
 import pytest
