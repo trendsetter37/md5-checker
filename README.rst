@@ -45,7 +45,7 @@ Inside the root directory, run
 
 ::
 
-  pip install pytest>=2.8.7
+  pip install -r requirements.txt
   py.test
 
 Usage
