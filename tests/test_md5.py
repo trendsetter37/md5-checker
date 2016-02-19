@@ -38,7 +38,7 @@ def test_cli_script():
         assert res.upper() == FIRST1
     else:
         res = make_regression_call_to_cli(args)
-        assert res[0] == FIRST1
+        assert res[0].strip() == FIRST1
 
 def test_cli_with_incorrect_args():
     args = shlex.split('md5checker')
@@ -47,7 +47,7 @@ def test_cli_with_incorrect_args():
         assert res == USAGE_PROMPT
     else:
         res = make_regression_call_to_cli(args)
-        assert res[0] == USAGE_PROMPT
+        assert res[0].strip() == USAGE_PROMPT
 
 def make_regression_call_to_cli(args):
     ''' return tuple (stdout, stderr) '''
