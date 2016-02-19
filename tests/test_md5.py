@@ -38,7 +38,7 @@ def test_cli_script():
         assert res.upper() == FIRST1
     else:
         res = make_regression_call_to_cli(args)
-        assert res == FIRST1
+        assert res.upper() == FIRST1
 
 def test_cli_with_incorrect_args():
     args = shlex.split('md5checker')
@@ -51,7 +51,7 @@ def test_cli_with_incorrect_args():
 
 def make_regression_call_to_cli(args):
     ''' return tuple (stdout, stderr) '''
-    return subprocess.Popen(args, stdout=PIPE).communicate()[0].strip().upper()
+    return subprocess.Popen(args, stdout=PIPE).communicate()[0].strip()
 
 if __name__ == '__main__':
     print(test_cli_script())
