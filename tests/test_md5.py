@@ -31,19 +31,26 @@ def test_md5_IOError():
         checkmd5.make_hash('fake_file.txt')
 
 def test_cli_script():
+    args = shlex.split('md5checker ./tests/data/file1.txt')
     if '2.6' not in PYTHON_VERSION:
-        res = subprocess.check_output(
-            ['md5checker', './tests/data/file1.txt']
-        ).decode('utf-8').strip()
+        res = subprocess.check_output(args).decode('utf-8').strip()
         assert res.upper() == FIRST1
     else:
-        args = shlex.split('md5checker ./tests/data/fil1.txt')
-        res = subprocess.Popen(args).decode('utf-8').strip()
-        assert res == FIRST1
+        res = make_regression_call_to_cli(args)
+        assert res[0] == FIRST1
 
 def test_cli_with_incorrect_args():
-    res = subprocess.check_output(['md5checker']).strip().decode('utf-8')
-    assert res == USAGE_PROMPT
+    args = shlex.split('md5checker')
+    if '2.6' not in PYTHON_VERSION:
+        res = subprocess.check_output(args).strip().decode('utf-8')
+        assert res == USAGE_PROMPT
+    else:
+        res = make_regression_call_to_cli(args)
+        assert res[0] == USAGE_PROMPT
+
+def make_regression_call_to_cli(args):
+    ''' return tuple (stdout, stderr) '''
+    return subprocess.Popen(args, stdout=PIPE).communicate()
 
 if __name__ == '__main__':
     print(test_cli_script())
