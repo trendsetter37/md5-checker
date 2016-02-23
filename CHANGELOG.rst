@@ -1,7 +1,6 @@
 0.2.0
 =====
 * Added Tests
-  * conftest.py file (fixture)
 
 * Added support for additional Hash algorithms
   * sha1

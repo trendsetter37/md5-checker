@@ -76,11 +76,43 @@ quotations are unnecessary.
 
   md5checker space-containing-directory/path-to-file.extension
 
+Options
+^^^^^^^
+Get version.
+
+::
+
+  md5checker -v
+  0.2.0
+
+List hash algorithms.
+
+::
+
+  md5checker -a
+
+Use alternate hash algorithm.
+
+::
+
+  md5checker setup.cfg -a sha1
+  bf72c7d5ca4a4b2731bde5cfcc323ce64b533865
+
 Module
 ~~~~~~
 ::
 
   >>> from md5checker import make_hash
-  >>> make_hash('test2.txt')
-  '970d8d13fc40ecb5c382790540d227a4'
-  >>>
+  >>> make_hash('setup.cfg')
+  ad895e8b0bd7d47e2a793dca3730aead
+  >>> make_hash('setup.cfg', algo='sha1')
+  bf72c7d5ca4a4b2731bde5cfcc323ce64b533865
+
+Available algorithms
+~~~~~~~~~~~~~~~~~~~~
+* MD5
+* SHA1
+* SHA224
+* SHA256
+* SHA384
+* SHA512
