@@ -14,7 +14,7 @@ def list_algorithms():
     ''' List available algorithms '''
     algorithms = sorted(list(hashlib.algorithms_guaranteed))
     prompt = 'Available hash types'
-    print('\n' + prompt )
+    print(prompt)
     print('-' * len(prompt) + '\n')
     print('\n'.join(algorithms))
 
@@ -38,4 +38,4 @@ def main():
             print(make_hash(args[1], algo=args[3]))
         else:
             print('Optional flags are -a or --algo')
-            sys.exit(1)
+            
