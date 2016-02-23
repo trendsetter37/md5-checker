@@ -2,6 +2,13 @@
 =====
 * Added Tests
 
+* Added support for additional Hash algorithms
+  * sha1
+  * sha224
+  * sha256
+  * sha384
+  * sha512
+
 
 0.1.1
 =====
