@@ -40,19 +40,24 @@ or
 
   pip install .
 
-Testing
--------
+Testing (Development)
+---------------------
+
 Inside the root directory, run
+
 
 ::
 
   pip install -r requirements.txt
+  pip install -e .
   py.test
 
 or
 
 ::
 
+  pip install -r requirements.txt
+  pip install -e .
   python setup.py test
 
 Usage

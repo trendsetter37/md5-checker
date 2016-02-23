@@ -11,43 +11,43 @@ import json
 DIRECTORY = os.path.dirname(__file__)
 _join = os.path.join
 DATA_PATH = os.path.abspath(_join(DIRECTORY, 'data'))
-USAGE_PROMPT = 'Usage: md5checker "path-to-file"'
+USAGE_PROMPT = 'Usage: md5checker "path-to-file" [options]'
 PYTHON_VERSION = platform.python_version()  # Check for python 2.6
 SYSTEM = platform.system()
 PIPE = subprocess.PIPE
 
+class TestHashes:
 
-with open(str(_join(DATA_PATH, 'data.json')), 'r') as f:
-    files = json.loads(f.read())
+    def test_md5_hash(self, files):
+        for obj in files.keys():
+            filename = _join(DATA_PATH, obj + '.txt')
+            assert files[obj]['md5'] == checkmd5.make_hash(filename).upper()
 
-FIRST1 = files['file1']['md5']
+    def test_md5_IOError(self, ):
+        with pytest.raises(IOError):
+            checkmd5.make_hash('fake_file.txt')
 
-def test_md5_hash():
-    for obj in files.keys():
-        filename = _join(DATA_PATH, obj + '.txt')
-        assert files[obj]['md5'] == checkmd5.make_hash(filename).upper()
+    # Ensure that the package is installed for this to work
+    def test_cli_script(self, files):
+        args = shlex.split('md5checker ./tests/data/file1.txt')
+        if '2.6' not in PYTHON_VERSION:
+            res = subprocess.check_output(args).decode('utf-8').strip()
+            assert res.upper() == files['file1']['md5']
+        else:
+            res = make_regression_call_to_cli(args)
+            assert res.upper() == files['file1']['md5']
 
-def test_md5_IOError():
-    with pytest.raises(IOError):
-        checkmd5.make_hash('fake_file.txt')
+    def test_cli_with_incorrect_args(self):
+        args = shlex.split('md5checker')
+        if '2.6' not in PYTHON_VERSION:
+            res = subprocess.check_output(args).strip().decode('utf-8')
+            assert res == USAGE_PROMPT
+        else:
+            res = make_regression_call_to_cli(args)
+            assert res == USAGE_PROMPT
 
-def test_cli_script():
-    args = shlex.split('md5checker ./tests/data/file1.txt')
-    if '2.6' not in PYTHON_VERSION:
-        res = subprocess.check_output(args).decode('utf-8').strip()
-        assert res.upper() == FIRST1
-    else:
-        res = make_regression_call_to_cli(args)
-        assert res.upper() == FIRST1
-
-def test_cli_with_incorrect_args():
-    args = shlex.split('md5checker')
-    if '2.6' not in PYTHON_VERSION:
-        res = subprocess.check_output(args).strip().decode('utf-8')
-        assert res == USAGE_PROMPT
-    else:
-        res = make_regression_call_to_cli(args)
-        assert res == USAGE_PROMPT
+class TestCLI:
+    pass
 
 def make_regression_call_to_cli(args):
     ''' return tuple (stdout, stderr) '''
