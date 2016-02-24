@@ -12,7 +12,7 @@ def usage():
 
 def list_algorithms():
     ''' List available algorithms '''
-    algorithms = sorted(list(hashlib.algorithms_guaranteed))
+    algorithms = ('md5', 'sha1', 'sha224', 'sha256', 'sha384', 'sha512')
     prompt = 'Available hash types'
     print(prompt)
     print('-' * len(prompt) + '\n')
@@ -38,4 +38,3 @@ def main():
             print(make_hash(args[1], algo=args[3]))
         else:
             print('Optional flags are -a or --algo')
-            
