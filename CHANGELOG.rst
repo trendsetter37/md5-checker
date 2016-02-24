@@ -9,6 +9,8 @@
   * sha384
   * sha512
 
+* Add command line algorithms List
+
 
 0.1.1
 =====
