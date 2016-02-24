@@ -78,61 +78,58 @@ def test_IOError():
     with pytest.raises(IOError):
         checkmd5.make_hash('fake_file.txt')
 
-class TestCLI:
-    # Ensure that the package is installed for this to work
-    @pytest.mark.parametrize(
-        'algo',
-        ['md5', 'sha1', 'sha224', 'sha256', 'sha384', 'sha512']
-    )
-    def test_cli_script(self, algo):
-        args = shlex.split('md5checker ./tests/data/file1.txt -a ' + algo)
-        if '2.6' not in PYTHON_VERSION:
-            res = subprocess.check_output(args).decode('utf-8').strip()
-            assert res == FILES['file1'][algo]
-        else:
-            res = make_regression_call_to_cli(args)
-            assert res == FILES['file1'][algo]
+@pytest.mark.parametrize(
+    'algo',
+    ['md5', 'sha1', 'sha224', 'sha256', 'sha384', 'sha512']
+)
+def test_cli_script(algo):
+    args = shlex.split('md5checker ./tests/data/file1.txt -a ' + algo)
+    if '2.6' not in PYTHON_VERSION:
+        res = subprocess.check_output(args).decode('utf-8').strip()
+        assert res == FILES['file1'][algo]
+    else:
+        res = make_regression_call_to_cli(args)
+        assert res == FILES['file1'][algo]
 
-    @pytest.mark.parametrize(
-        'args',
-        ['md5checker', 'md5checker 1 2 3 4']
-    )
-    def test_cli_with_incorrect_args(self, args):
-        args = shlex.split('md5checker')
-        if '2.6' not in PYTHON_VERSION:
-            res = subprocess.check_output(args).strip().decode('utf-8')
-            assert res == USAGE_PROMPT
-        else:
-            res = make_regression_call_to_cli(args)
-            assert res == USAGE_PROMPT
+@pytest.mark.parametrize(
+    'args',
+    ['md5checker', 'md5checker 1 2 3 4']
+)
+def test_cli_with_incorrect_args( args):
+    args = shlex.split('md5checker')
+    if '2.6' not in PYTHON_VERSION:
+        res = subprocess.check_output(args).strip().decode('utf-8')
+        assert res == USAGE_PROMPT
+    else:
+        res = make_regression_call_to_cli(args)
+        assert res == USAGE_PROMPT
 
-    def test_get_version(self):
-        args = shlex.split('md5checker -v')
-        if '2.6' not in PYTHON_VERSION:
-            res = subprocess.check_output(args).strip().decode('utf-8')
-            assert res == VERSION
-        else:
-            res = make_regression_call_to_cli(args)
-            assert res == VERSION
+def test_get_version():
+    args = shlex.split('md5checker -v')
+    if '2.6' not in PYTHON_VERSION:
+        res = subprocess.check_output(args).strip().decode('utf-8')
+        assert res == VERSION
+    else:
+        res = make_regression_call_to_cli(args)
+        assert res == VERSION
 
-    def test_list_algorithms(self):
-        args = shlex.split('md5checker -a')
-        if '2.6' not in PYTHON_VERSION:
-            res = clean_output(subprocess.check_output(args).decode('utf-8').strip())
-            assert res == ALGOS
-        else:
-            res = clean_output(make_regression_call_to_cli(args))
-            assert res == ALGOS
+def test_list_algorithms():
+    args = shlex.split('md5checker -a')
+    if '2.6' not in PYTHON_VERSION:
+        res = clean_output(subprocess.check_output(args).decode('utf-8').strip())
+        assert res == ALGOS
+    else:
+        res = clean_output(make_regression_call_to_cli(args))
+        assert res == ALGOS
 
-    def test_wrong_option_flags(self):
-        args = shlex.split('md5checker fake_file.txt -b foption')
-
-        if '2.6' not in PYTHON_VERSION:
-            res = clean_output(subprocess.check_output(args).decode('utf-8').strip())
-            assert res == OPTIONAL_FLAGS
-        else:
-            res = clean_output(make_regression_call_to_cli(args))
-            assert res == OPTIONAL_FLAGS
+def test_wrong_option_flags():
+    args = shlex.split('md5checker fake_file.txt -b foption')
+    if '2.6' not in PYTHON_VERSION:
+        res = clean_output(subprocess.check_output(args).decode('utf-8').strip())
+        assert res == OPTIONAL_FLAGS
+    else:
+        res = clean_output(make_regression_call_to_cli(args))
+        assert res == OPTIONAL_FLAGS
 
 def make_regression_call_to_cli(args):
     ''' return tuple (stdout, stderr) '''
