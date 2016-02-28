@@ -1,7 +1,7 @@
 codecov==1.6.3
 colorama==0.3.6
 coverage==4.0.3
-md5checker==0.1.1
+md5checker==0.2.1
 py==1.4.31
 pytest==2.8.7
 pytest-cov==2.2.1
