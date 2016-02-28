@@ -5,7 +5,7 @@ import os
 import hashlib
 make_hash = c.make_hash
 _FLAGS = ('-a', '--algo')
-__version__ = '0.2.0'
+__version__ = '0.2.1'
 
 def usage():
     print('Usage: md5checker "path-to-file" [options]')
