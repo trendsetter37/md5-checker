@@ -12,6 +12,7 @@ from __future__ import print_function
 import os
 import hashlib
 
+
 def make_hash(filename, algo='md5'):
     '''
         Returns an md5 hash of the data in the file.

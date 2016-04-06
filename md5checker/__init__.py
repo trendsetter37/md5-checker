@@ -7,8 +7,10 @@ make_hash = c.make_hash
 _FLAGS = ('-a', '--algo')
 __version__ = '0.2.1'
 
+
 def usage():
     print('Usage: md5checker "path-to-file" [options]')
+
 
 def list_algorithms():
     ''' List available algorithms '''
@@ -17,6 +19,7 @@ def list_algorithms():
     print(prompt)
     print('-' * len(prompt) + '\n')
     print('\n'.join(algorithms))
+
 
 def main():
     ''' Entry point for the application script '''
@@ -38,4 +41,3 @@ def main():
             print(make_hash(args[1], algo=args[3]))
         else:
             print('Optional flags are -a or --algo')
-            
