@@ -16,10 +16,11 @@ class TestCLI(object):
         )
         if '2.6' not in PYTHON_VERSION:
             res = subprocess.check_output(args).decode('utf-8').strip()
-            assert res == FILES['file1'][algo]
+            expected = FILES['file1'][algo]
+            assert res == expected
         else:
             res = TestCLI.make_regression_call_to_cli(args)
-            assert res == FILES['file1'][algo]
+            assert res == expected
 
     @pytest.mark.parametrize(
         'args',
@@ -29,10 +30,14 @@ class TestCLI(object):
         args = shlex.split('md5checker')
         if '2.6' not in PYTHON_VERSION:
             res = subprocess.check_output(args).strip().decode('utf-8')
+            res1 = md5checker.usage()
             assert res == USAGE_PROMPT
+            assert res1 == USAGE_PROMPT
         else:
             res = TestCLI.make_regression_call_to_cli(args)
+            res1 = md5checker.usage()
             assert res == USAGE_PROMPT
+            assert res1 == USAGE_PROMPT
 
     def test_get_version(self):
         args = shlex.split('md5checker -v')

@@ -1,4 +1,5 @@
 ''' Constants used throughout test modules '''
+import hashlib
 import md5checker
 import json
 import os
@@ -6,16 +7,12 @@ import platform
 import subprocess
 
 join = os.path.join
-ALGOS = """Available hash types
---------------------
-
-md5
-sha1
-sha224
-sha256
-sha384
-sha512"""
+_algorithms = sorted(list(hashlib.algorithms_guaranteed))
+_prompt = 'Available hash types\n'
+_response = _prompt + ('-' * len(_prompt)) + '\n\n' + '\n'.join(_algorithms)
+ALGOS = _response
 CHECKMD5 = md5checker.checkmd5
+CLI = md5checker
 DIRECTORY = os.path.dirname(__file__)
 DATA_PATH = os.path.abspath(join(DIRECTORY, 'data'))
 FILES = json.loads(open(join(DATA_PATH, 'data.json'), 'r').read())
