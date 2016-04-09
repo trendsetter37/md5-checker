@@ -43,10 +43,14 @@ class TestCLI(object):
         args = shlex.split('md5checker -v')
         if '2.6' not in PYTHON_VERSION:
             res = subprocess.check_output(args).strip().decode('utf-8')
+            res1 = md5checker.__version__
             assert res == VERSION
+            assert res1 == res
         else:
             res = TestCLI.make_regression_call_to_cli(args)
+            res1 = md5checker.__version__
             assert res == VERSION
+            assert res1 == res
 
     def test_list_algorithms(self):
         args = shlex.split('md5checker -a')
@@ -54,12 +58,15 @@ class TestCLI(object):
             res = TestCLI.clean_output(
                 subprocess.check_output(args).decode('utf-8').strip()
             )
+            res1 = md5checker.list_algorithms()
             assert res == ALGOS
+            assert res1 == res
         else:
             res = TestCLI.clean_output(
                 TestCLI.make_regression_call_to_cli(args)
             )
-            assert res == ALGOS
+            res1 = md5checker.list_algorithms()
+            assert res == ALGOS_26
 
     def test_wrong_option_flags(self):
         args = shlex.split('md5checker fake_file.txt -b foption')

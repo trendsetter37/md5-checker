@@ -22,3 +22,8 @@ PYTHON_VERSION = platform.python_version()  # Check for python 2.6
 SYSTEM = platform.system()
 USAGE_PROMPT = 'Usage: md5checker "path-to-file" [options]'
 VERSION = md5checker.__version__
+
+ALGOS_26 = (
+	'MD5', 'SHA1', 'SHA224',
+	'SHA256', 'SHA384', 'SHA512'
+)
