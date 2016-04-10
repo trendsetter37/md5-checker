@@ -18,9 +18,12 @@ class TestCLI(object):
             res = subprocess.check_output(args).decode('utf-8').strip()
             expected = FILES['file1'][algo]
             assert res == expected
+
         else:
             res = TestCLI.make_regression_call_to_cli(args)
+            res1 = md5checker.main(lis=args)
             assert res == expected
+ 
 
     @pytest.mark.parametrize(
         'args',
@@ -55,18 +58,11 @@ class TestCLI(object):
     def test_list_algorithms(self):
         args = shlex.split('md5checker -a')
         if '2.6' not in PYTHON_VERSION:
-            res = TestCLI.clean_output(
-                subprocess.check_output(args).decode('utf-8').strip()
-            )
             res1 = md5checker.list_algorithms()
-            assert res == ALGOS
-            assert res1 == res
+            assert res1 == ALGOS
         else:
-            res = TestCLI.clean_output(
-                TestCLI.make_regression_call_to_cli(args)
-            )
             res1 = md5checker.list_algorithms()
-            assert res == ALGOS_26
+            assert res1 == ALGOS_26
 
     def test_wrong_option_flags(self):
         args = shlex.split('md5checker fake_file.txt -b foption')
@@ -75,12 +71,16 @@ class TestCLI(object):
             res = TestCLI.clean_output(
                 subprocess.check_output(args).decode('utf-8').strip()
             )
+            res1 = md5checker.optional_flags()
             assert res == OPTIONAL_FLAGS
+            assert res1 == OPTIONAL_FLAGS
         else:
             res = TestCLI.clean_output(
                 TestCLI.make_regression_call_to_cli(args)
             )
+            res1 = md5_checker.optional_flags()
             assert res == OPTIONAL_FLAGS
+            assert res1 == OPTIONAL_FLAGS
 
     @staticmethod
     def make_regression_call_to_cli(args):

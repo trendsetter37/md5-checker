@@ -5,12 +5,15 @@ import json
 import os
 import platform
 import subprocess
+import sys
 
 join = os.path.join
-_algorithms = sorted(list(hashlib.algorithms_guaranteed))
-_prompt = 'Available hash types\n'
-_response = _prompt + ('-' * len(_prompt)) + '\n\n' + '\n'.join(_algorithms)
-ALGOS = _response
+
+ALGOS = tuple(sorted(list(hashlib.algorithms_guaranteed)))
+ALGOS_26 = (
+    'MD5', 'SHA1', 'SHA224',
+    'SHA256', 'SHA384', 'SHA512'
+)
 CHECKMD5 = md5checker.checkmd5
 CLI = md5checker
 DIRECTORY = os.path.dirname(__file__)
@@ -22,8 +25,3 @@ PYTHON_VERSION = platform.python_version()  # Check for python 2.6
 SYSTEM = platform.system()
 USAGE_PROMPT = 'Usage: md5checker "path-to-file" [options]'
 VERSION = md5checker.__version__
-
-ALGOS_26 = (
-	'MD5', 'SHA1', 'SHA224',
-	'SHA256', 'SHA384', 'SHA512'
-)
