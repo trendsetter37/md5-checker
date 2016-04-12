@@ -24,4 +24,4 @@ PIPE = subprocess.PIPE
 PYTHON_VERSION = platform.python_version()  # Check for python 2.6
 SYSTEM = platform.system()
 USAGE_PROMPT = 'Usage: md5checker "path-to-file" [options]'
-VERSION = md5checker.__version__
+VERSION = md5checker.__name__ + ' ' + md5checker.__version__

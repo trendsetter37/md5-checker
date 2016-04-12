@@ -46,12 +46,12 @@ class TestCLI(object):
             res = subprocess.check_output(args).strip().decode('utf-8')
             res1 = md5checker.__version__
             assert res == VERSION
-            assert res1 == res
+            assert md5checker.__name__ + ' ' + res1 == res
         else:
             res = TestCLI.make_regression_call_to_cli(args)
             res1 = md5checker.__version__
             assert res == VERSION
-            assert res1 == res
+            assert md5checker.__name__ + ' ' + res1 == res
 
     def test_list_algorithms(self):
         args = shlex.split('md5checker -a')
@@ -66,13 +66,21 @@ class TestCLI(object):
         args = shlex.split('md5checker fake_file.txt -b foption')
 
         if '2.6' not in PYTHON_VERSION:
+            pytest.raises(
+                subprocess.CalledProcessError,
+                subprocess.check_output(args).decode('utf-8').strip(),
+                'unrecognized arguments: -b foption'
+            )
+            '''
             res = TestCLI.clean_output(
                 subprocess.check_output(args).decode('utf-8').strip()
             )
             res1 = md5checker.optional_flags()
             assert res == OPTIONAL_FLAGS
             assert res1 == OPTIONAL_FLAGS
+            '''
         else:
+            # TODO(trendsetter37) mirror if branch here
             res = TestCLI.clean_output(
                 TestCLI.make_regression_call_to_cli(args)
             )
