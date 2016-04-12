@@ -20,9 +20,9 @@ class TestCLI(object):
             res = subprocess.check_output(args).decode('utf-8').strip()
             assert res == expected
         else:
-            res = TestCLI.make_regression_call_to_cli(args) 
+            res = TestCLI.make_regression_call_to_cli(args)
             assert res == expected
- 
+
 
     @pytest.mark.parametrize(
         'args',
@@ -77,7 +77,7 @@ class TestCLI(object):
             res = TestCLI.clean_output(
                 TestCLI.make_regression_call_to_cli(args)
             )
-            res1 = md5_checker.optional_flags()
+            res1 = md5checker.optional_flags()
             assert res == OPTIONAL_FLAGS
             assert res1 == OPTIONAL_FLAGS
 
@@ -85,7 +85,7 @@ class TestCLI(object):
         # fill sys.argv with vars from test_cli module
         print('Pseudo args are: ')
         print(len(sys.argv))
-        
+
 
     @staticmethod
     def make_regression_call_to_cli(args):

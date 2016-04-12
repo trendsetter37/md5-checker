@@ -76,3 +76,6 @@ py3
 
 #Environment Variables
 .env
+
+tags
+.tags_swap
