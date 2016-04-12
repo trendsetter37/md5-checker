@@ -7,29 +7,38 @@ import argparse
 
 make_hash = c.make_hash
 _FLAGS = ('-a', '--algo')
+__name__ = 'md5checker'
 __version__ = '0.2.1'
 _ALGOS_26 = (
     'MD5', 'SHA1', 'SHA224',
     'SHA256', 'SHA384', 'SHA512'
 )
 
-parser = argparse.ArgumentParser(description='Check hash values for files and directories.')
+parser = argparse.ArgumentParser(
+    description='Check hash values for files and directories.'
+)
 parser.add_argument('file', metavar='<file>', help='File to hash.')
 parser.add_argument(
-    '-a', '--algorithm', metavar='<algorithm>', nargs=1, 
+    '-a', '--algorithm', choices=[a.lower() for a in _ALGOS_26],
+    default='md5', metavar='<algorithm>',
     help='Choose hash algorithm to use.'
 )
 parser.add_argument(
     '-d', '--directory', metavar='<directory>',
-    nargs=1, help='Return hash for a directory'
-
+    help='Set this if input is a directory.'
 )
 parser.add_argument(
     '-l', '--ls', help='List hash algorithms availble'
 )
+parser.add_argument(
+    '-v', '--version', action='version',
+    version=__name__ + ' ' + __version__
+)
+
 
 if '2.6' in sys.version:
     hashlib.algorithms_guaranteed = _ALGOS_26
+
 
 def usage():
     response = 'Usage: md5checker "path-to-file" [options]'
@@ -47,7 +56,10 @@ def optional_flags():
 
 def main():
     ''' Entry point for the application script '''
-    args = sys.argv
+    # args = sys.argv
+    args = parser.parse_args()
+    print(args)
+    '''
     length = len(sys.argv)
     print('Args: {}'.format(*args))
 
@@ -71,3 +83,4 @@ def main():
             print(make_hash(args[1], algo=args[3]))
         else:
             print(optional_flags())
+    '''

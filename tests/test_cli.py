@@ -23,7 +23,6 @@ class TestCLI(object):
             res = TestCLI.make_regression_call_to_cli(args)
             assert res == expected
 
-
     @pytest.mark.parametrize(
         'args',
         ['md5checker', 'md5checker 1 2 3 4']
@@ -85,7 +84,6 @@ class TestCLI(object):
         # fill sys.argv with vars from test_cli module
         print('Pseudo args are: ')
         print(len(sys.argv))
-
 
     @staticmethod
     def make_regression_call_to_cli(args):
