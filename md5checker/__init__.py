@@ -3,12 +3,29 @@ from . import checkmd5 as c
 import sys
 import os
 import hashlib
+import argparse
+
 make_hash = c.make_hash
 _FLAGS = ('-a', '--algo')
 __version__ = '0.2.1'
 _ALGOS_26 = (
     'MD5', 'SHA1', 'SHA224',
     'SHA256', 'SHA384', 'SHA512'
+)
+
+parser = argparse.ArgumentParser(description='Check hash values for files and directories.')
+parser.add_argument('file', metavar='<file>', help='File to hash.')
+parser.add_argument(
+    '-a', '--algorithm', metavar='<algorithm>', nargs=1, 
+    help='Choose hash algorithm to use.'
+)
+parser.add_argument(
+    '-d', '--directory', metavar='<directory>',
+    nargs=1, help='Return hash for a directory'
+
+)
+parser.add_argument(
+    '-l', '--ls', help='List hash algorithms availble'
 )
 
 if '2.6' in sys.version:
@@ -28,13 +45,11 @@ def optional_flags():
     return 'Optional flags are -a or --algo'
 
 
-def main(lis=None):
+def main():
     ''' Entry point for the application script '''
-    if lis is not None:
-        args = lis
-    else:
-        args = sys.argv
-    length = len(args)
+    args = sys.argv
+    length = len(sys.argv)
+    print('Args: {}'.format(*args))
 
     if length < 2 or length > 4:
         print(usage())
@@ -47,7 +62,9 @@ def main(lis=None):
             print('-' * len(prompt))
             print('\n'.join(list_algorithms()))
         else:
-            print(make_hash(args[1]))
+            h = make_hash(args[1])
+            print(h)
+            return h
     elif length == 4:
         flag = args[2]
         if flag in _FLAGS:

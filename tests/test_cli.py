@@ -1,6 +1,7 @@
 ''' Test command line functionality '''
 import pytest
 import shlex
+import sys
 from .__init__ import *
 
 
@@ -14,14 +15,12 @@ class TestCLI(object):
         args = shlex.split(
             'md5checker ' + 'tests/data/file1.txt' + ' -a ' + algo
         )
+        expected = FILES['file1'][algo]
         if '2.6' not in PYTHON_VERSION:
             res = subprocess.check_output(args).decode('utf-8').strip()
-            expected = FILES['file1'][algo]
             assert res == expected
-
         else:
-            res = TestCLI.make_regression_call_to_cli(args)
-            res1 = md5checker.main(lis=args)
+            res = TestCLI.make_regression_call_to_cli(args) 
             assert res == expected
  
 
@@ -81,6 +80,12 @@ class TestCLI(object):
             res1 = md5_checker.optional_flags()
             assert res == OPTIONAL_FLAGS
             assert res1 == OPTIONAL_FLAGS
+
+    def test_main_invocation(self):
+        # fill sys.argv with vars from test_cli module
+        print('Pseudo args are: ')
+        print(len(sys.argv))
+        
 
     @staticmethod
     def make_regression_call_to_cli(args):
