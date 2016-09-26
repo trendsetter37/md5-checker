@@ -28,12 +28,10 @@ class TestCLI(object):
         if '2.6' not in PYTHON_VERSION:
             res = subprocess.check_output(args).strip().decode('utf-8')
             res1 = md5checker.__version__
-            assert res == VERSION
             assert md5checker.__name__ + ' ' + res1 == res
         else:
             res = TestCLI.make_regression_call_to_cli(args)
             res1 = md5checker.__version__
-            assert res == VERSION
             assert md5checker.__name__ + ' ' + res1 == res
 
     def test_list_algorithms(self):
