@@ -23,17 +23,6 @@ class TestCLI(object):
             res = TestCLI.make_regression_call_to_cli(args)
             assert res == expected
 
-    def test_get_version(self):
-        args = shlex.split('md5checker -v')
-        if '2.6' not in PYTHON_VERSION:
-            res = subprocess.check_output(args).strip().decode('utf-8')
-            res1 = md5checker.__version__
-            assert md5checker.__name__ + ' ' + res1 == res
-        else:
-            res = TestCLI.make_regression_call_to_cli(args)
-            res1 = md5checker.__version__
-            assert md5checker.__name__ + ' ' + res1 == res
-
     def test_list_algorithms(self):
         args = shlex.split('md5checker -a')
         if '2.6' not in PYTHON_VERSION:
