@@ -75,6 +75,7 @@ md5/
 py3
 
 #Environment Variables
+venv/
 .env
 
 tags

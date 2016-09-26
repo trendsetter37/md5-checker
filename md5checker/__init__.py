@@ -59,6 +59,9 @@ parser.add_argument(
 
 def main():
     ''' Entry point for the application script '''
+    if len(sys.argv) < 2:
+        print(usage())
+        sys.exit(1)
     args = parser.parse_args()
     if args.directory:
         raise NotImplementedError('Not ready for primetime.')
