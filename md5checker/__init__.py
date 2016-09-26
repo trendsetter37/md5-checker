@@ -30,6 +30,9 @@ def list_algorithms():
 def optional_flags():
     return 'Optional flags are -a or --algo'
 
+def version():
+    return __name__ + ' ' + __version__
+
 
 parser = argparse.ArgumentParser(
     description='Check hash values for files and directories.',
@@ -53,15 +56,12 @@ parser.add_argument(
 )
 parser.add_argument(
     '-v', '--version', action='version',
-    version=__name__ + ' ' + __version__
+    version=version()
 )
 
 
 def main():
     ''' Entry point for the application script '''
-    if len(sys.argv) < 2:
-        print(usage())
-        sys.exit(1)
     args = parser.parse_args()
     if args.directory:
         raise NotImplementedError('Not ready for primetime.')
